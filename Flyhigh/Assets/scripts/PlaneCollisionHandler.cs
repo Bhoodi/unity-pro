@@ -1,45 +1,66 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlaneCollisionHandler : MonoBehaviour
 {
-    // Referencer til game over UI-panel
+    // Reference til Game Over-panelet, som skal ligge i et separat Canvas
     public GameObject gameOverPanel;
 
-    // Når flyet rammer noget (brug OnCollisionEnter2D hvis dine objekter ikke er triggere)
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Tjek om den kolliderede objekt har tag "Bird" eller "Water"
-        if(collision.gameObject.CompareTag("Bird") || collision.gameObject.CompareTag("Water"))
+        // Hvis flyet rammer vandet, skal det ødelægges
+        if (collision.gameObject.CompareTag("Water"))
         {
-            Debug.Log("Collision with " + collision.gameObject.tag);
+            Debug.Log("Collision with Water");
             GameOver();
         }
+        // Hvis flyet rammer en fugl, mister flyet hastighed
+        else if (collision.gameObject.CompareTag("Bird"))
+        {
+            Debug.Log("Collision with Bird");
+            PlaneController pc = GetComponent<PlaneController>();
+            if (pc != null)
+            {
+                // Reducér flyets vandrette hastighed med 2 enheder
+                pc.AddSpeed(-2f);
+            }
+        }
     }
-    
-    // Alternativt, hvis dine kolliderende objekter er triggere:
+
+    // Hvis du bruger triggere, kan du med fordel have samme logik
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Bird") || other.gameObject.CompareTag("Water"))
+        if (other.gameObject.CompareTag("Water"))
         {
-            Debug.Log("Trigger collision with " + other.gameObject.tag);
+            Debug.Log("Trigger collision with Water");
             GameOver();
         }
+        else if (other.gameObject.CompareTag("Bird"))
+        {
+            Debug.Log("Trigger collision with Bird");
+            PlaneController pc = GetComponent<PlaneController>();
+            if (pc != null)
+            {
+                pc.AddSpeed(-2f);
+            }
+        }
     }
-    
+
     void GameOver()
     {
-        // Deaktiver eventuelt flyets kontrol (fx PlaneController)
-        PlaneController pc = GetComponent<PlaneController>();
-        if(pc != null)
-        {
-            pc.enabled = false;
-        }
-        
-        // Vis game over-panelet med restart-knappen
-        if(gameOverPanel != null)
+        // Aktiver Game Over-panelet, som ligger i et separat Canvas
+        if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
+            gameOverPanel.transform.SetAsLastSibling(); // Sikrer, at panelet vises øverst
+            Debug.Log("Game Over-panel activated.");
         }
+        
+        // Forsink destruktionen af flyet, så UI'et får tid til at vise sig
+        Invoke("DestroyPlane", 0.5f);
+    }
+
+    void DestroyPlane()
+    {
+        Destroy(gameObject);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +11,18 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentPlatform;
 
+    [Header("Win UI")]
+    // Dette GameObject skal være dit win-panel (UI), som du har oprettet i et separat Canvas
+    public GameObject winPanel;
+
     void Start()
     {
         SpawnPlatform();
+        // Sørg for, at winPanel er deaktiveret ved start
+        if (winPanel != null)
+        {
+            winPanel.SetActive(false);
+        }
     }
 
     void SpawnPlatform()
@@ -25,5 +35,16 @@ public class GameManager : MonoBehaviour
 
         // Instantiér platformen
         currentPlatform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
+    }
+
+    // Kald denne metode, når flyet lander korrekt
+    public void WinGame()
+    {
+        Debug.Log("Game Won!");
+        if (winPanel != null)
+        {
+            winPanel.SetActive(true);
+            winPanel.transform.SetAsLastSibling(); // Sørger for, at winPanel vises øverst
+        }
     }
 }
