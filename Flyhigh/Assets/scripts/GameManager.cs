@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -12,39 +13,37 @@ public class GameManager : MonoBehaviour
     private GameObject currentPlatform;
 
     [Header("Win UI")]
-    // Dette GameObject skal være dit win-panel (UI), som du har oprettet i et separat Canvas
-    public GameObject winPanel;
+    // Referer til din TextMeshPro-komponent, som skal vise "YOU WIN"
+    public TMP_Text winText;
 
     void Start()
     {
         SpawnPlatform();
-        // Sørg for, at winPanel er deaktiveret ved start
-        if (winPanel != null)
+        
+        // Sørg for, at winText er deaktiveret ved spilstart
+        if (winText != null)
         {
-            winPanel.SetActive(false);
+            winText.gameObject.SetActive(false);
         }
     }
 
     void SpawnPlatform()
     {
-        // Vælg en tilfældig x-position
         float randomX = Random.Range(minSpawnDistance, maxSpawnDistance);
-
-        // Opret en ny position for platformen
         Vector2 spawnPos = new Vector2(randomX, platformY);
-
-        // Instantiér platformen
         currentPlatform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
     }
 
-    // Kald denne metode, når flyet lander korrekt
+    // Denne metode kaldes, når flyet lander korrekt og vinder spillet
     public void WinGame()
     {
         Debug.Log("Game Won!");
-        if (winPanel != null)
+        if (winText != null)
         {
-            winPanel.SetActive(true);
-            winPanel.transform.SetAsLastSibling(); // Sørger for, at winPanel vises øverst
+            winText.gameObject.SetActive(true);
+            winText.text = "YOU WIN";
+            // Sørg for, at winText vises øverst i Canvas-hierarkiet
+            winText.transform.SetAsLastSibling();
         }
     }
 }
