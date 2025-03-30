@@ -56,7 +56,7 @@ public class PlaneCollisionHandler : MonoBehaviour
         }
         
         // Forsink destruktionen af flyet, så UI'et får tid til at vise sig
-        Invoke("DestroyPlane", 0.5f);
+        Invoke("DestroyPlane", 0.001f);
     }
 
     void DestroyPlane()
