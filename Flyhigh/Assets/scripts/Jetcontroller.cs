@@ -22,7 +22,7 @@ public class JetController : FlyingVehicle
     protected override void Start()
     {
         base.Start();
-        // Jets start with higher base speed
+        // Jets start with a higher base speed
         speedDecayFactor = 0.998f;  // Lower decay for jets
     }
 
@@ -52,7 +52,7 @@ public class JetController : FlyingVehicle
 
     private void HandleAfterburner()
     {
-        // Activate afterburner with space key
+        // Activate afterburner with space key if not cooling down and not already active
         if (Input.GetKeyDown(KeyCode.Space) && cooldownTimeRemaining <= 0 && !afterburnerActive)
         {
             ActivateAfterburner();
@@ -62,7 +62,6 @@ public class JetController : FlyingVehicle
         if (afterburnerActive)
         {
             afterburnerTimeRemaining -= Time.fixedDeltaTime;
-            
             if (afterburnerTimeRemaining <= 0)
             {
                 DeactivateAfterburner();
@@ -78,14 +77,30 @@ public class JetController : FlyingVehicle
     {
         afterburnerActive = true;
         afterburnerTimeRemaining = afterburnerDuration;
-        rb.velocity = new Vector2(rb.velocity.x * afterburnerMultiplier, rb.velocity.y);
+        
+        float currentSpeed = rb.velocity.x;
+        // Multiplicative boost
+        float boostedSpeed = currentSpeed * afterburnerMultiplier;
+        
+        // Hvis currentSpeed er lav, tilføj en fast boost
+        float speedThreshold = 5f;  // Tærskel for lav hastighed
+        float fixedBoost = 5f;      // Den faste boostmængde
+        if (Mathf.Abs(currentSpeed) < speedThreshold)
+        {
+            if (currentSpeed >= 0)
+                boostedSpeed += fixedBoost;
+            else
+                boostedSpeed -= fixedBoost;
+        }
+        
+        rb.velocity = new Vector2(boostedSpeed, rb.velocity.y);
         
         if (jetExhaustEffect != null)
         {
             jetExhaustEffect.Play();
         }
         
-        Debug.Log("[JetController] Afterburner activated!");
+        Debug.Log("[JetController] Afterburner activated! Boosted speed: " + boostedSpeed);
     }
     
     private void DeactivateAfterburner()
@@ -99,5 +114,11 @@ public class JetController : FlyingVehicle
         }
         
         Debug.Log("[JetController] Afterburner deactivated, cooling down.");
+    }
+    
+    public override void AddSpeed(float boostAmount)
+    {
+        rb.velocity = new Vector2(rb.velocity.x + boostAmount, rb.velocity.y);
+        Debug.Log($"[{GetType().Name}] AddSpeed called, new velocity: {rb.velocity}");
     }
 }

@@ -8,14 +8,14 @@ public class WindBooster : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Tjekker om objektet har en PlaneController
-        PlaneController plane = other.GetComponent<PlaneController>();
-        if (plane != null)
+        // Tjekker om objektet har en FlyingVehicle-komponent
+        FlyingVehicle vehicle = other.GetComponent<FlyingVehicle>();
+        if (vehicle != null)
         {
-            // Kald en metode på flyet, der øger farten
-            plane.AddSpeed(boostAmount);
+            // Kald metoden på flyet, der øger farten
+            vehicle.AddSpeed(boostAmount);
 
-            // Hvis du vil have, at vind-objektet kun kan bruges én gang
+            // Hvis du vil have, at wind-objektet kun kan bruges én gang
             if (destroyOnUse)
             {
                 Destroy(gameObject);

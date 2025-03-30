@@ -8,6 +8,8 @@ TagManager:
   - Water
   - Bird
   - Plane
+  - Helicopter
+  - Jet
   layers:
   - Default
   - TransparentFX

@@ -13,13 +13,13 @@ public class SwingMeterController : MonoBehaviour
     private bool goingUp = true;
     private bool locked = false;
 
-    private PlaneController planeController;
+    private FlyingVehicle flyingVehicle;
 
     void Start()
     {
-        // Find flyet (Plane) i scenen
-        planeController = FindObjectOfType<PlaneController>();
-        Debug.Log("SwingMeter: Found planeController = " + planeController);
+        // Find det flyvende køretøj i scenen
+        flyingVehicle = FindObjectOfType<FlyingVehicle>();
+        Debug.Log("SwingMeter: Found flyingVehicle = " + flyingVehicle);
 
         // Indstil sliderens værdier
         slider.minValue = minValue;
@@ -57,14 +57,14 @@ public class SwingMeterController : MonoBehaviour
                 locked = true;
                 Debug.Log("SwingMeter: locked at value: " + slider.value);
 
-                if (planeController != null)
+                if (flyingVehicle != null)
                 {
                     Debug.Log("SwingMeter: Calling Launch with " + slider.value);
-                    planeController.Launch(slider.value);
+                    flyingVehicle.Launch(slider.value);
                 }
                 else
                 {
-                    Debug.LogWarning("SwingMeter: planeController is null! Launch not called.");
+                    Debug.LogWarning("SwingMeter: flyingVehicle is null! Launch not called.");
                 }
                 
                 // Skjul swingmeteret efter en kort forsinkelse

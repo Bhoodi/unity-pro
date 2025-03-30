@@ -4,10 +4,10 @@ public class LandingPlatform : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Antag, at dit fly har tagget "Plane" eller indeholder et PlaneController-script
-        if (collision.gameObject.CompareTag("Plane"))
+        // Hvis objektet har tag "Plane" eller "Helicopter"
+        if (collision.gameObject.CompareTag("Plane") || collision.gameObject.CompareTag("Helicopter")|| collision.gameObject.CompareTag("Jet"))
         {
-            Debug.Log("Plane has landed on the platform - You win!");
+            Debug.Log(collision.gameObject.tag + " has landed on the platform - You win!");
             // Find GameManager og kald WinGame()
             GameManager gm = FindObjectOfType<GameManager>();
             if (gm != null)

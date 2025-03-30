@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/scener/mainescene.unity
+    path: Assets/scener/PlaneMap.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/scener/Play.unity
+    path: Assets/scener/PlayMenu.unity
     guid: 1def6a81e4710dc459604e3da3271cbc
   - enabled: 1
     path: Assets/scener/Plane select.unity
     guid: 09c15b091a8dad74881c3ec8926cf1d3
+  - enabled: 1
+    path: Assets/scener/HelicopterMap.unity
+    guid: 7c638232168090f41aa871eb289aa947
+  - enabled: 1
+    path: Assets/scener/JetMap.unity
+    guid: a63318f8466c72b409cee834f3bc14bd
   m_configObjects: {}

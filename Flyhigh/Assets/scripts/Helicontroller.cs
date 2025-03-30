@@ -7,12 +7,12 @@ public class HelicopterController : FlyingVehicle
     public float maxHoverHeight = 10f;
     public float rotorRotationSpeed = 500f;
     
-    private Transform rotorTransform;  // Assign this in the inspector
-    
+    private Transform rotorTransform;  // Assign this in the Inspector
+
     protected override void Awake()
     {
         base.Awake();
-        // Set tag for identification
+        // Sæt tag for identifikation
         gameObject.tag = "Helicopter";
     }
 
@@ -20,7 +20,7 @@ public class HelicopterController : FlyingVehicle
     {
         base.Start();
         
-        // Find rotor if available (optional - can be set in inspector)
+        // Find rotor hvis ikke allerede sat via Inspector
         if (rotorTransform == null)
         {
             Transform[] children = GetComponentsInChildren<Transform>();
@@ -37,17 +37,18 @@ public class HelicopterController : FlyingVehicle
 
     public override void Launch(float launchPower)
     {
-        // Helicopters have more vertical than horizontal movement
+        // Helikoptere har mere fokus på vertikal bevægelse
         base.Launch(launchPower * 0.8f);
+        // Forøg den vertikale hastighed en smule
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 1.5f);
     }
 
     protected override void FixedUpdate()
     {
-        // Skip default speed decay but still process input
+        // Behandl brugerinput for helikopteren
         ProcessControlInput();
         
-        // Rotate rotor if found
+        // Roter rotor, hvis den findes
         if (rotorTransform != null)
         {
             rotorTransform.Rotate(Vector3.forward, rotorRotationSpeed * Time.fixedDeltaTime);
@@ -59,13 +60,13 @@ public class HelicopterController : FlyingVehicle
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         
-        // Allow helicopter to move horizontally with controls
-        rb.velocity = new Vector2(horizontalInput * 3f, rb.velocity.y);
+        // I stedet for at sætte den vandrette hastighed direkte, tilføj en kraft baseret på input
+        rb.AddForce(new Vector2(horizontalInput * 3f, 0f), ForceMode2D.Force);
         
-        // Apply hover force (stronger vertical control)
+        // Tilføj en hover-force for vertikalt input
         rb.AddForce(Vector2.up * verticalInput * hoverPower, ForceMode2D.Force);
         
-        // Limit max height
+        // Begræns maksimal højde: Hvis helikopteren overstiger maxHoverHeight, nulstil den vertikale hastighed
         if (transform.position.y > maxHoverHeight && rb.velocity.y > 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
