@@ -6,6 +6,8 @@ public class HelicopterController : FlyingVehicle
     public float hoverPower = 2.0f;
     public float maxHoverHeight = 10f;
     public float rotorRotationSpeed = 500f;
+    public float horizontalForce = 1.5f;  // Reduced from 3f
+    public float maxHorizontalSpeed = 5f; // Maximum horizontal speed
     
     private Transform rotorTransform;  // Assign this in the Inspector
 
@@ -60,8 +62,13 @@ public class HelicopterController : FlyingVehicle
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
         
-        // I stedet for at sætte den vandrette hastighed direkte, tilføj en kraft baseret på input
-        rb.AddForce(new Vector2(horizontalInput * 3f, 0f), ForceMode2D.Force);
+        // Reduce the horizontal force multiplier
+        rb.AddForce(new Vector2(horizontalInput * horizontalForce, 0f), ForceMode2D.Force);
+        
+        // Clamp horizontal velocity to limit max speed
+        Vector2 velocity = rb.velocity;
+        velocity.x = Mathf.Clamp(velocity.x, -maxHorizontalSpeed, maxHorizontalSpeed);
+        rb.velocity = velocity;
         
         // Tilføj en hover-force for vertikalt input
         rb.AddForce(Vector2.up * verticalInput * hoverPower, ForceMode2D.Force);
