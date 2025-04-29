@@ -23,7 +23,7 @@ public class JetController : FlyingVehicle
     {
         base.Start();
         // Jets start with a higher base speed
-        speedDecayFactor = 0.998f;  // Lower decay for jets
+        speedDecayFactor = 0.997f;  // Lower decay for jets
     }
 
     public override void Launch(float launchPower)
