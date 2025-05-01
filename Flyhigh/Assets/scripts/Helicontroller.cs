@@ -16,23 +16,6 @@ public class HelicopterController : FlyingVehicle
         gameObject.tag = "Helicopter";
     }
 
-    protected void Start()
-    {
-        // Find rotor hvis ikke allerede sat via Inspector
-        if (rotorTransform == null)
-        {
-            Transform[] children = GetComponentsInChildren<Transform>();
-            foreach (Transform child in children)
-            {
-                if (child.name.ToLower().Contains("rotor"))
-                {
-                    rotorTransform = child;
-                    break;
-                }
-            }
-        }
-    }
-
     public override void Launch(float launchPower)
     {
         // Helikoptere har mere fokus på vertikal bevægelse
