@@ -4,8 +4,6 @@ public class HelicopterController : FlyingVehicle
 {
     [Header("Specefikke Properties")] // gøre det nemmere at holde styr på 
     public float hoverPower = 2.0f;  // Kraften, der bruges til at holde helikopteren svævende
-    public float maxHoverHeight = 10f; // Den maksimale højde, helikopteren kan svæve over jorden
-    public float rotorRotationSpeed = 500f; // Hastigheden, hvormed rotorbladene roterer (i grader pr. sekund)
     public float horizontalForce = 1.5f;   // Kraften, der bruges til at bevæge helikopteren horisontalt
     public float maxHorizontalSpeed = 5f; // Den maksimale hastighed, helikopteren kan bevæge sig horisontalt
     
@@ -43,18 +41,6 @@ public class HelicopterController : FlyingVehicle
         rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 1.5f);
     }
 
-    protected override void FixedUpdate()
-    {
-        // Behandle brugerinput for helikopteren
-        ProcessControlInput();
-        
-        // Roter rotor, hvis den findes
-        if (rotorTransform != null)
-        {
-            rotorTransform.Rotate(Vector3.forward, rotorRotationSpeed * Time.fixedDeltaTime);
-        }
-    }
-
     protected override void ProcessControlInput()
     {
         float verticalInput = Input.GetAxis("Vertical");
@@ -70,11 +56,5 @@ public class HelicopterController : FlyingVehicle
         
         // Tilføj en hover-force for vertikalt input
         rb.AddForce(Vector2.up * verticalInput * hoverPower, ForceMode2D.Force);
-        
-        // Begræns maksimal højde: Hvis helikopteren overstiger maxHoverHeight, nulstil den vertikale hastighed
-        if (transform.position.y > maxHoverHeight && rb.velocity.y > 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-        }
     }
 }
