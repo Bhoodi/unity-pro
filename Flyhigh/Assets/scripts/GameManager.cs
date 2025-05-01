@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Platform Spawning")]
+    //Platform spawning settings
     public GameObject platformPrefab;
     public float minSpawnDistance = 20f;
     public float maxSpawnDistance = 50f;
     public float platformY = -3.6f;
 
-    [Header("Win UI")]
-    [Tooltip("Træk dit 'You Win' Canvas‑Panel ind her")]
+    // Win UI settings
     public GameObject winPanel;
 
     private bool gameWon = false;
@@ -26,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if (platformPrefab == null)
         {
-            Debug.LogError("PlatformPrefab ikke sat i Inspector!");
+            Debug.LogError("PlatformPrefab ikke sat i Inspector");
             return;
         }
 

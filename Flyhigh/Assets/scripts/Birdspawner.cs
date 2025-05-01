@@ -3,21 +3,15 @@ using UnityEngine;
 public class DroneSpawner : MonoBehaviour
 {
     [Header("Prefab & Count")]
-    [Tooltip("Dronen eller fuglen, der skal spawnes")]
     public GameObject dronePrefab;
-    [Tooltip("Hvor mange droner/fugle der skal spawnes ved start")]
     public int numberToSpawn = 5;
 
     [Header("Horizontal Distance (fra spawner)")]
-    [Tooltip("Min afstand (vandret) fra spawner")]
     public float minSpawnDistance = 20f;
-    [Tooltip("Max afstand (vandret) fra spawner")]
     public float maxSpawnDistance = 100f;
 
     [Header("Vertical Height Range")]
-    [Tooltip("Laveste højde (Y) dronen kan spawne på")]
     public float minSpawnHeight = 1f;
-    [Tooltip("Højeste højde (Y) dronen kan spawne på")]
     public float maxSpawnHeight = 5f;
 
     void Start()

@@ -4831,7 +4831,7 @@ MonoBehaviour:
   platformPrefab: {fileID: 2135390386133815316, guid: 7fa354b8fac4873408ac95698fa840bc, type: 3}
   minSpawnDistance: 50
   maxSpawnDistance: 50
-  platformY: -3.6
+  platformY: -3.5
   winPanel: {fileID: 1694642122}
 --- !u!4 &501029559
 Transform:

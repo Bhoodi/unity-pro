@@ -3,13 +3,11 @@ using System.Collections;
 
 public class JetController : FlyingVehicle
 {
-    [Header("Jet-Specific Properties")]
-    public float afterburnerMultiplier = 1.5f;
-    public float afterburnerDuration = 2.0f;
-    public float afterburnerCooldown = 5.0f;
-
-    [Header("Visual Afterburner")]
-    [Tooltip("GameObject med dit ‘exhaust’-billede (SpriteRenderer eller UI Image).")]
+    [Header("Specifikke Properties")] // gøre det nemmere at holde styr på 
+    public float afterburnerMultiplier = 1.5f; // Denne variabel angiver, hvor meget jetmotorens kraft eller hastighed bliver forøget, når afterburneren aktiveres.
+    public float afterburnerDuration = 2.0f;  // Denne variabel bestemmer, hvor længe afterburneren kan være aktiv, før den slukker automatisk.
+    public float afterburnerCooldown = 5.0f; // Denne variabel angiver, hvor lang tid der skal gå, før afterburneren kan bruges igen, efter den har været aktiv.
+    
     public GameObject exhaustImage;
 
     private bool afterburnerActive = false;
@@ -23,9 +21,8 @@ public class JetController : FlyingVehicle
         gameObject.tag = "Jet";
     }
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         speedDecayFactor = 0.997f;
         // Skjul billedet i starten
         if (exhaustImage != null)

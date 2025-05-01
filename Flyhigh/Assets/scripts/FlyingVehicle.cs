@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class FlyingVehicle : MonoBehaviour
 {
-    [Header("Base Vehicle Properties")]
-    public float startSpeed = 0f;
-    public float gravityScaleOverride = 0.8f;
-    public float speedDecayFactor = 0.995f;
-    public float verticalControlMultiplier = 5f;
-    public float minControlSpeed = 2f;
-    public float baseUpwardImpulse = 2f;  // Renamed from initialUpwardImpulse to avoid serialization conflicts
+    [Header("Base Properties")]
+    public float startSpeed = 0f;                       // Bestemmer startfarten for flyet, når det begynder at bevæge sig.
+    public float gravityScaleOverride = 0.8f;           // Justerer, hvor meget tyngdekraften påvirker flyet (lavere værdi = mindre påvirkning).
+    public float speedDecayFactor = 0.995f;             // Reducerer farten gradvist over tid (en slags friktion i luften).
+    public float verticalControlMultiplier = 5f;        // Forstærker, hvor hurtigt flyet kan bevæge sig opad eller nedad, når spilleren styrer det.
+    public float minControlSpeed = 2f;                  // Angiver den minimale fart, hvor spilleren stadig kan kontrollere flyet.
+    public float baseUpwardImpulse = 2f;                //Bestemmer den grundlæggende kraft, der skubber flyet opad (fx ved start eller hop).
 
     [HideInInspector] public Rigidbody2D rb;
 
@@ -16,22 +16,13 @@ public class FlyingVehicle : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravityScaleOverride;
-        Debug.Log($"[{GetType().Name}] Awake - gravityScale set to {gravityScaleOverride}");
-    }
-
-    protected virtual void Start()
-    {
-        Debug.Log($"[{GetType().Name}] Start called");
     }
 
     public virtual void Launch(float launchPower)
     {
         startSpeed = launchPower;
-        Debug.Log($"[{GetType().Name}] Launch called with power: {launchPower}");
         
-        // Update to use the renamed field
         rb.velocity = new Vector2(startSpeed, baseUpwardImpulse);
-        Debug.Log("Velocity after Launch: " + rb.velocity);
     }
 
     protected virtual void FixedUpdate()
@@ -57,6 +48,5 @@ public class FlyingVehicle : MonoBehaviour
     public virtual void AddSpeed(float boostAmount)
     {
         rb.velocity = new Vector2(rb.velocity.x + boostAmount, rb.velocity.y);
-        Debug.Log($"[{GetType().Name}] AddSpeed called, new velocity: {rb.velocity}");
     }
 }

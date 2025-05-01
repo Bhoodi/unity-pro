@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class PlaneCollisionHandler : MonoBehaviour
 {
-    [Header("Game Over UI")]
-    [Tooltip("Træk dit Game Over-Canvas (root GameObject) ind her – det skal hedde 'Game Over' og være deaktiveret i Editor")]
     public Canvas gameOverCanvas;
-
-    [Header("Explosion Effect")]
-    [Tooltip("Træk dit Explosion-prefab (Particle System eller Animated Sprite) ind her")]
     public GameObject explosionPrefab;
 
     private bool isGameOver = false;

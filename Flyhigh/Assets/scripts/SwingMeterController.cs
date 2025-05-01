@@ -29,8 +29,6 @@ public class SwingMeterController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("SwingMeter Update kører");
-
         if (!locked)
         {
             // Få slideren til at svinge
@@ -55,11 +53,11 @@ public class SwingMeterController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 locked = true;
-                Debug.Log("SwingMeter: locked at value: " + slider.value);
+                Debug.Log("SwingMeter: Kalder at value: " + slider.value);
 
                 if (flyingVehicle != null)
                 {
-                    Debug.Log("SwingMeter: Calling Launch with " + slider.value);
+                    Debug.Log("SwingMeter: Kalder Launch with " + slider.value);
                     flyingVehicle.Launch(slider.value);
                 }
                 else

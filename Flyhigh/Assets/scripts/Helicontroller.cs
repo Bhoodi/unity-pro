@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class HelicopterController : FlyingVehicle
 {
-    [Header("Helicopter-Specific Properties")]
-    public float hoverPower = 2.0f;
-    public float maxHoverHeight = 10f;
-    public float rotorRotationSpeed = 500f;
-    public float horizontalForce = 1.5f;  // Reduced from 3f
-    public float maxHorizontalSpeed = 5f; // Maximum horizontal speed
+    [Header("Specefikke Properties")] // gøre det nemmere at holde styr på 
+    public float hoverPower = 2.0f;  // Kraften, der bruges til at holde helikopteren svævende
+    public float maxHoverHeight = 10f; // Den maksimale højde, helikopteren kan svæve over jorden
+    public float rotorRotationSpeed = 500f; // Hastigheden, hvormed rotorbladene roterer (i grader pr. sekund)
+    public float horizontalForce = 1.5f;   // Kraften, der bruges til at bevæge helikopteren horisontalt
+    public float maxHorizontalSpeed = 5f; // Den maksimale hastighed, helikopteren kan bevæge sig horisontalt
     
-    private Transform rotorTransform;  // Assign this in the Inspector
+    private Transform rotorTransform;  
 
     protected override void Awake()
     {
@@ -18,10 +18,8 @@ public class HelicopterController : FlyingVehicle
         gameObject.tag = "Helicopter";
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-        
         // Find rotor hvis ikke allerede sat via Inspector
         if (rotorTransform == null)
         {
@@ -47,7 +45,7 @@ public class HelicopterController : FlyingVehicle
 
     protected override void FixedUpdate()
     {
-        // Behandl brugerinput for helikopteren
+        // Behandle brugerinput for helikopteren
         ProcessControlInput();
         
         // Roter rotor, hvis den findes

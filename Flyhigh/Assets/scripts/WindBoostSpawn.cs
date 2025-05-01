@@ -2,11 +2,8 @@ using UnityEngine;
 
 public class WindBoostSpawn : MonoBehaviour
 {
-    [Header("Prefab & Count")]
-    [Tooltip("Prefab med dit WindBooster-script")]
-    public WindBooster windBoostPrefab;
-    [Tooltip("Hvor mange wind-boostere der skal spawne ved start")]
-    public int numberToSpawn = 2;
+    public WindBooster windBoostPrefab; // Prefab for the wind boost
+    public int numberToSpawn = 2;   // Number of wind boosts skal spawne
 
     [Header("Spawn Range")]
     public float minX = 10f;

@@ -17,7 +17,7 @@ public class AircraftSelection : MonoBehaviour
         public string gameSceneName; // Scene name for this aircraft
     }
 
-    [Header("Aircraft Options")]
+    [Header("Aircraft Options")]  // bruger header for at gøre det nemmere at holde styr på
     [SerializeField] private List<Aircraft> availableAircraft = new List<Aircraft>();
     
     [Header("UI References")]
@@ -26,8 +26,7 @@ public class AircraftSelection : MonoBehaviour
     [SerializeField] private Text aircraftNameText;
     [SerializeField] private Text aircraftDescriptionText;
     [SerializeField] private Image aircraftPreviewImage;
-    [SerializeField] private Button playButton; // This will be optional now
-    
+    [SerializeField] private Button playButton; 
     [Header("Navigation")]
     [SerializeField] private Button backButton;
     [SerializeField] private string mainMenuSceneName = "MainMenu";
