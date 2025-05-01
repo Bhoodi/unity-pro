@@ -8,7 +8,6 @@ public class VehicleSpawner : MonoBehaviour
     public GameObject jetPrefab;
     public GameObject helicopterPrefab;
     
-    [Header("Spawn Settings")]
     public Transform spawnPoint;
     public float initialLaunchPower = 10f;
     

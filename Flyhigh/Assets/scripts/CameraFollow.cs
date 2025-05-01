@@ -2,10 +2,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [Header("Target to follow")]
     public Transform target; // Det objekt (fx flyet), kameraet skal følge
-
-    [Header("Follow settings")]
     public float smoothTime = 0.3f;   // Hvor “blødt” kameraet følger med
     private Vector3 velocity = Vector3.zero;
 

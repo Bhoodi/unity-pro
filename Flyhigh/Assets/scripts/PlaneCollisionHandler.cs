@@ -49,14 +49,14 @@ public class PlaneCollisionHandler : MonoBehaviour
     {
         isGameOver = true;
 
-        // 1) Aktiver Game Over UI
+        // Aktiver Game Over UI
         if (gameOverCanvas != null)
         {
             gameOverCanvas.gameObject.SetActive(true);
             gameOverCanvas.sortingOrder = 100;
         }
 
-        // 2) Spawn explosion i flyets position
+        // Spawn explosion i flyets position
         if (explosionPrefab != null)
         {
             GameObject expl = Instantiate(
@@ -68,7 +68,7 @@ public class PlaneCollisionHandler : MonoBehaviour
         
         }
 
-        // 3) Ødelæg flyet
+        // Ødelæg flyet
         Destroy(gameObject);
     }
 }

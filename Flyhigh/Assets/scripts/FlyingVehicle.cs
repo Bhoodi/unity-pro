@@ -8,7 +8,7 @@ public class FlyingVehicle : MonoBehaviour
     public float speedDecayFactor = 0.995f;             // Reducerer farten gradvist over tid (en slags friktion i luften).
     public float verticalControlMultiplier = 5f;        // Forstærker, hvor hurtigt flyet kan bevæge sig opad eller nedad, når spilleren styrer det.
     public float minControlSpeed = 2f;                  // Angiver den minimale fart, hvor spilleren stadig kan kontrollere flyet.
-    public float baseUpwardImpulse = 2f;                //Bestemmer den grundlæggende kraft, der skubber flyet opad (fx ved start eller hop).
+    public float baseUpwardImpulse = 2f;                // Bestemmer den grundlæggende kraft, der skubber flyet opad (fx ved start eller hop).
 
     [HideInInspector] public Rigidbody2D rb;
 

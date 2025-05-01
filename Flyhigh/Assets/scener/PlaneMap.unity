@@ -2061,8 +2061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 2135390386133815316, guid: 7fa354b8fac4873408ac95698fa840bc, type: 3}
-  minSpawnDistance: 50
-  maxSpawnDistance: 50
+  minSpawnDistance: 40
+  maxSpawnDistance: 200
   platformY: -3.6
   winPanel: {fileID: 1101105013}
 --- !u!4 &501029559

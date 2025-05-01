@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class DroneSpawner : MonoBehaviour
 {
-    [Header("Prefab & Count")]
     public GameObject dronePrefab;
     public int numberToSpawn = 5;
 

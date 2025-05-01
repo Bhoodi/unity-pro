@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HelicopterController : FlyingVehicle
 {
-    [Header("Specefikke Properties")] // gøre det nemmere at holde styr på 
+    [Header("Specifikke Properties")] // gøre det nemmere at holde styr på 
     public float hoverPower = 2.0f;  // Kraften, der bruges til at holde helikopteren svævende
     public float horizontalForce = 1.5f;   // Kraften, der bruges til at bevæge helikopteren horisontalt
     public float maxHorizontalSpeed = 5f; // Den maksimale hastighed, helikopteren kan bevæge sig horisontalt
